@@ -8,3 +8,4 @@ dotenv
 PyMuPDF
 tqdm
 supabase
+gunicorn
