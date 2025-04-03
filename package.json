@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "franc": "^6.2.0",
+    "langdetect": "^0.2.1",
+    "react": "^19.1.0",
+    "react-awesome-reveal": "^4.3.1",
+    "react-markdown": "^10.1.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.2.4"
+  }
+}
