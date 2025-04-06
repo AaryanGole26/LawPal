@@ -117,3 +117,15 @@ cd LawPal
 - **Flask & Vite-React** for building the backend and frontend.  
 - **Supabase** for authentication and database management.  
 
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Contact
+
+[![GitHub - AaryanGole26](https://img.shields.io/badge/GitHub%20-%23AaryanGole26-%2300A6A6?style=for-the-badge)](https://github.com/AaryanGole26)
+[![Repository - LawPal](https://img.shields.io/badge/Repository%20-%23CineSLEUTH-%2300A6A6?style=for-the-badge)](https://github.com/AaryanGole26/LawPal)
