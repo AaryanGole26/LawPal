@@ -101,13 +101,13 @@ cd LawPal
 ## **Screenshots**
 
 ![Homepage Screenshot](./ss/homepage.jpg)  
-*Caption: LawPal Homepage*  
+*LawPal Homepage*  
 
 ![Features](./ss/features.jpg)  
-*Caption: Available Legal Services*  
+*Available Legal Services and Features*  
 
 ![Chatbot](./ss/chatbot.jpg)  
-*Caption: Chatbot in Action*  
+*Chatbot in Action*  
 
 ---
 
