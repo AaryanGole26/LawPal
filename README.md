@@ -15,7 +15,7 @@
 ---
 
 ## **Technologies Used**
-- **Frontend**: React, Tailwind CSS  
+- **Frontend**: Vite, React, Tailwind CSS  
 - **Backend**: Flask, Pinecone, Groq  
 - **Authentication**: Supabase Authentication  
 - **Voice Recognition**: Web Speech API  
@@ -29,7 +29,7 @@
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/your-username/LawPal.git
+git clone https://github.com/AaryanGole26/LawPal.git
 cd LawPal
 ```
 
@@ -100,13 +100,13 @@ cd LawPal
 
 ## **Screenshots**
 
-![Homepage Screenshot](./screenshots/Landing.png)  
+![Homepage Screenshot](./ss/homepage.jpg)  
 *Caption: LawPal Homepage*  
 
-![Features](./screenshots/Features.png)  
+![Features](./ss/features.jpg)  
 *Caption: Available Legal Services*  
 
-![Chatbot](./screenshots/Chatbot.png)  
+![Chatbot](./ss/chatbot.jpg)  
 *Caption: Chatbot in Action*  
 
 ---
@@ -114,6 +114,6 @@ cd LawPal
 ## **Acknowledgments**
 - **Pinecone** for vector search capabilities.  
 - **Groq** for NLP-powered legal analysis.  
-- **Flask & React** for building the backend and frontend.  
+- **Flask & Vite-React** for building the backend and frontend.  
 - **Supabase** for authentication and database management.  
 
