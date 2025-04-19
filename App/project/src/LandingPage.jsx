@@ -26,8 +26,7 @@ const Model = () => {
       modelRef.current.rotation.x = Math.max(-Math.PI / 6, Math.min(Math.PI / 6, modelRef.current.rotation.x));
     }
   });
-
-  return <primitive ref={modelRef} object={scene} scale={1.5} position={[0, -1, 0]} />;
+  return <primitive ref={modelRef} object={scene} scale={2.1} position={[0, -1.7, 0]} />;
 };
 
 export const Hero = () => {
@@ -240,6 +239,17 @@ export const Footer = () => (
                 className="hover:underline"
               >
                 Ministry of Law and Justice
+              </a>
+            </li>
+            <li className="flex items-center hover:text-white transition">
+            <FiBriefcase size={18} className="text-white mr-2" />
+              <a
+                href="https://www.indiacode.nic.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                India Code - Digital Repo of Laws
               </a>
             </li>
             <li className="flex items-center hover:text-white transition">
