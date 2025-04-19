@@ -44,6 +44,7 @@ export const Header = ({ user }) => {
             <Link to="/" className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300">Home</Link>
             <Link to="/services" className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300">Services</Link>
             <Link to="/about" className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300">About</Link>
+            <Link to="/resources" className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300">Resources</Link>
             <Link to="/contact" className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300">Contact</Link>
             
             <div className="ml-4 flex space-x-2">
@@ -100,6 +101,11 @@ export const Header = ({ user }) => {
                 onClick={() => setIsOpen(false)}
                 className="px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 block">
                 About
+              </Link>
+              <Link to="/resources" 
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 block">
+                Resources
               </Link>
               <Link to="/contact" 
                 onClick={() => setIsOpen(false)}
