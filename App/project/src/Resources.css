@@ -1,0 +1,124 @@
+.resources-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 100px; /* Ensure content isn’t hidden by a fixed header */
+  background-color: #121212; /* Dark background matching the theme */
+  min-height: 100vh;
+}
+
+.resources-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  padding: 10px 0;
+}
+
+.resources-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.resource-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  width: 160px; /* Adjust width as needed */
+}
+
+.resource-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.resource-link {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+}
+
+.pdf-preview {
+  width: 80px;
+  height: 100px;
+  margin: 0 auto 10px auto;
+  background: #1f2937; /* Fallback bg in case preview fails */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.document-icon {
+  font-size: 3rem;
+  color: #ffffff;
+}
+
+.resource-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.loading,
+.no-resources {
+  text-align: center;
+  font-size: 1.2em;
+  padding: 20px;
+  color: #d1d5db;
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.google-search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.google-search-input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  background-color: #ffffff; /* Light background for contrast */
+  color: #000000; /* Force text to be black */
+}
+
+.google-search-input::placeholder {
+  color: #000000;
+  opacity: 0.7;
+}
+
+.google-search-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-left: none;
+  background-color: #a855f7;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.google-search-button:hover {
+  background-color: #3b82f6;
+}
