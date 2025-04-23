@@ -20,7 +20,7 @@ app = Flask(__name__)
 # Configure CORS
 CORS(app, resources={
     r"/*": {
-        "origins": ["http://localhost:5173"],
+        "origins": ["https://lawpal.vercel.app", "http://localhost:5173"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "X-User-ID"],
     }
@@ -286,6 +286,10 @@ def chat_service(service):
     return handle_chat(service)
 
 if __name__ == "__main__":
+    import os
     BUCKET_NAME = "pdfs"
-    create_pinecone_index(BUCKET_NAME)
-    app.run(port=5000)
+    # Run Pinecone index creation only if explicitly enabled (e.g., during setup)
+    if os.getenv("CREATE_PINECONE_INDEX", "false").lower() == "true":
+        create_pinecone_index(BUCKET_NAME)
+    port = int(os.environ.get("PORT", 5000))  # Use Vercel's dynamic port
+    app.run(host="0.0.0.0", port=port, debug=False)
