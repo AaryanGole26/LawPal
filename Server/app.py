@@ -286,10 +286,9 @@ def chat_service(service):
     return handle_chat(service)
 
 if __name__ == "__main__":
-    import os
     BUCKET_NAME = "pdfs"
-    # Run Pinecone index creation only if explicitly enabled (e.g., during setup)
+    # Run Pinecone index creation only if explicitly enabled
     if os.getenv("CREATE_PINECONE_INDEX", "false").lower() == "true":
         create_pinecone_index(BUCKET_NAME)
-    port = int(os.environ.get("PORT", 5000))  # Use Vercel's dynamic port
+    port = int(os.environ.get("PORT", 7860))  # Hugging Face default port
     app.run(host="0.0.0.0", port=port, debug=False)
