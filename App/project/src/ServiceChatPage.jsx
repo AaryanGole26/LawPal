@@ -4,6 +4,7 @@ import { FiMic, FiSend, FiVolume2, FiVolumeX } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import { franc } from "franc";
 import { createClient } from "@supabase/supabase-js";
+
 const apiUrl = import.meta.env.VITE_API_URL;
 // Initialize Supabase client
 const supabase = createClient(
@@ -15,7 +16,7 @@ const ServiceChatPage = () => {
   const { serviceTitle } = useParams();
   const location = useLocation();
   const decodedTitle = decodeURIComponent(serviceTitle);
-  const port = location.state?.port || 5000;
+  const port = location.state?.port || apiUrl;
 
   const [prompt, setPrompt] = useState("");
   const [recognition, setRecognition] = useState(null);
@@ -73,7 +74,7 @@ const ServiceChatPage = () => {
   
       try {
         const formattedServiceTitle = decodedTitle.toLowerCase().replace(/\s+/g, "-");
-        const res = await fetch(`http://127.0.0.1:5000/${formattedServiceTitle}/history`, {
+        const res = await fetch(`${apiUrl}/${formattedServiceTitle}/history`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -202,7 +203,7 @@ const ServiceChatPage = () => {
 
     try {
       const formattedServiceTitle = decodedTitle.toLowerCase().replace(/\s+/g, "-");
-      const res = await fetch(`http://127.0.0.1:5000/${formattedServiceTitle}/chat`, {
+      const res = await fetch(`${apiUrl}/${formattedServiceTitle}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
