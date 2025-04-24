@@ -1,7 +1,7 @@
 // AboutUs.jsx
 import React, { useState, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const AboutUs = () => {
   // FAQ data (9 items)
   const faqs = [
