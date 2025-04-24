@@ -9,3 +9,5 @@ PyMuPDF
 tqdm
 supabase
 gunicorn
+huggingface_hub[hf_xet]
+hf_xet
