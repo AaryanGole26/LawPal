@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FiMail, FiPhone, FiMapPin, FiHeadphones } from "react-icons/fi";
-const apiUrl = import.meta.env.VITE_API_URL;
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -9,7 +8,7 @@ const ContactUs = () => {
     subject: "",
     message: "",
   });
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [status, setStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
