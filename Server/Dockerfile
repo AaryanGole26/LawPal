@@ -9,7 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the Server directory contents
-COPY Server/ .
+COPY . .
 
 # Expose the port (Railway will override with $PORT)
 EXPOSE 7860
