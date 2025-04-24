@@ -290,5 +290,5 @@ if __name__ == "__main__":
     # Run Pinecone index creation only if explicitly enabled
     if os.getenv("CREATE_PINECONE_INDEX", "false").lower() == "true":
         create_pinecone_index(BUCKET_NAME)
-    port = int(os.environ.get("PORT", 7860))  # Hugging Face default port
+    port = int(os.environ.get("PORT", 5000))  # Hugging Face default port
     app.run(host="0.0.0.0", port=port, debug=False)
