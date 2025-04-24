@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "react-awesome-reveal": "^4.0.0"
     "@react-three/drei": "^10.0.5",
     "@react-three/fiber": "^9.1.1",
     "@supabase/supabase-js": "^2.45.0",
