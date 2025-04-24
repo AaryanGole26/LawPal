@@ -10,6 +10,7 @@ export const Header = ({ user }) => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const apiUrl = import.meta.env.VITE_API_URL;
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
@@ -17,6 +18,7 @@ export const Header = ({ user }) => {
   }, []);
 
   const handleLogout = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
