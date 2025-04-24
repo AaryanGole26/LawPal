@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiFileText, FiBriefcase, FiHome, FiShield, FiBook, FiMail, FiPhone } from 'react-icons/fi';
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 // ─────────────────────────────────────────────────────────────
 // Hero Component
 // ─────────────────────────────────────────────────────────────
