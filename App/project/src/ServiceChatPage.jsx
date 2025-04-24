@@ -4,6 +4,7 @@ import { FiMic, FiSend, FiVolume2, FiVolumeX } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import { franc } from "franc";
 import { createClient } from "@supabase/supabase-js";
+import { useTranslation } from "react-i18next";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 // Initialize Supabase client
