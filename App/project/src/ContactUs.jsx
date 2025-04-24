@@ -135,7 +135,6 @@ const ContactUs = () => {
               </p>
             )}
             {status === "success" && (
-             විටිපත් පිටුව: https://github.com/AaryanGole26/LawPal.git
               <p className="text-green-300 mt-4 flex items-center">
                 <span className="inline-block w-4 h-4 mr-2 bg-green-300 rounded-full"></span>
                 {statusMessage}
