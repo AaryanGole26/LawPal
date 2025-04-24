@@ -262,7 +262,7 @@ def handle_chat(service: str):
 def get_chat_history(service):
     if request.method == 'OPTIONS':
         response = jsonify({"message": "CORS preflight successful"})
-        response.headers.add("Access-Control-Allow-Origin", "http://localhost:5173")
+        response.headers.add("Access-Control-Allow-Origin", "https://law-pal.vercel.app")
         response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type, X-User-ID")
         return response, 200
@@ -277,7 +277,7 @@ def get_chat_history(service):
 def chat_service(service):
     if request.method == 'OPTIONS':
         response = jsonify({"message": "CORS preflight successful"})
-        response.headers.add("Access-Control-Allow-Origin", "http://localhost:5173")
+        response.headers.add("Access-Control-Allow-Origin", "https://law-pal.vercel.app")
         response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type, X-User-ID")
         return response, 200
