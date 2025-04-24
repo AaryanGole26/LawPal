@@ -1,22 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FiMic, FiSend, FiVolume2, FiVolumeX } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import { franc } from "franc";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase"; // Import centralized Supabase client
 
 const apiUrl = import.meta.env.VITE_API_URL;
-// Initialize Supabase client
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 const ServiceChatPage = () => {
   const { serviceTitle } = useParams();
-  const location = useLocation();
   const decodedTitle = decodeURIComponent(serviceTitle);
-  const port = location.state?.port || apiUrl;
 
   const [prompt, setPrompt] = useState("");
   const [recognition, setRecognition] = useState(null);
@@ -71,7 +64,7 @@ const ServiceChatPage = () => {
   useEffect(() => {
     const fetchChatHistory = async () => {
       if (!userId) return;
-  
+
       try {
         const formattedServiceTitle = decodedTitle.toLowerCase().replace(/\s+/g, "-");
         const res = await fetch(`${apiUrl}/${formattedServiceTitle}/history`, {
@@ -81,20 +74,25 @@ const ServiceChatPage = () => {
             "X-User-ID": userId,
           },
         });
-  
+
+        if (res.status === 404) {
+          setConversation([]);
+          return;
+        }
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
-  
+
         const data = await res.json();
         if (data.history) {
           setConversation(data.history);
         }
       } catch (error) {
         console.error("Error fetching chat history:", error);
+        setConversation([]);
       }
     };
-  
+
     fetchChatHistory();
   }, [userId, decodedTitle]);
 
@@ -189,7 +187,7 @@ const ServiceChatPage = () => {
           setIsListening(false);
           alert("No speech detected. Please try again.");
         }
-      }, 5000);
+      }, import.meta.env.VITE_SPEECH_TIMEOUT || 5000);
     }
   };
 
@@ -211,6 +209,10 @@ const ServiceChatPage = () => {
         },
         body: JSON.stringify({ query: prompt.trim(), user_id: userId }),
       });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
 
       const data = await res.json();
 
