@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FiMic, FiSend, FiVolume2, FiVolumeX } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import { franc } from "franc";
-import { supabase } from "../lib/supabase"; // Import centralized Supabase client
+import { supabase } from "@supabase/supabase-js";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
