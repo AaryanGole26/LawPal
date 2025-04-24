@@ -1,0 +1,13 @@
+Flask
+Flask-CORS==4.0.0
+pinecone
+sentence-transformers
+groq==0.20.0
+huggingface_hub
+dotenv
+PyMuPDF
+tqdm
+supabase
+gunicorn
+huggingface_hub[hf_xet]
+hf_xet
