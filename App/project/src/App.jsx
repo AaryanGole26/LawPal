@@ -15,7 +15,7 @@ import i18n from "./i18n";
 
 function App() {
   const [user, setUser] = useState(null);
-  const apiUrl = import.meta.env.VITE_API_URL || 'https://lawpal.up.railway.app';
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
