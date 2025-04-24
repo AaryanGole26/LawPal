@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiMail, FiPhone, FiMapPin, FiHeadphones } from "react-icons/fi";
+
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -10,7 +11,7 @@ const ContactUs = () => {
   });
   const apiUrl = import.meta.env.VITE_API_URL;
   const [status, setStatus] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [statusMessage, setStatusMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,10 +20,10 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
-    setErrorMessage(null);
+    setStatusMessage(null);
 
     try {
-      const response = await fetch(`${apiUrl}/submit-form`); {
+      const response = await fetch(`${apiUrl}/submit-form`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -32,14 +33,15 @@ const ContactUs = () => {
 
       if (response.ok) {
         setStatus("success");
+        setStatusMessage(data.message || "Message sent successfully!");
         setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
       } else {
-        setStatus("ok");
-        setErrorMessage("Submitted successfully!");
+        setStatus("error");
+        setStatusMessage(data.error || "Failed to submit the form.");
       }
     } catch (error) {
       setStatus("error");
-      setErrorMessage(`Network error: ${error.message}`);
+      setStatusMessage(`Network error: ${error.message}`);
     }
   };
 
@@ -125,13 +127,23 @@ const ContactUs = () => {
               </button>
             </form>
 
-            {/* Status Message */}
-            {status === "loading" && <p className="text-yellow-300 mt-4 flex items-center"><span className="inline-block w-4 h-4 mr-2 bg-yellow-300 rounded-full animate-pulse"></span>Sending...</p>}
-            {status === "success" && <p className="text-green-300 mt-4 flex items-center"><span className="inline-block w-4 h-4 mr-2 bg-green-300 rounded-full"></span>Message sent successfully!</p>}
+            {/* Status Messages */}
+            {status === "loading" && (
+              <p className="text-yellow-300 mt-4 flex items-center">
+                <span className="inline-block w-4 h-4 mr-2 bg-yellow-300 rounded-full animate-pulse"></span>
+                Sending...
+              </p>
+            )}
+            {status === "success" && (
+              <p className="text-green-300 mt-4 flex items-center">
+                <span className="inline-block w-4 h-4 mr-2 bg-green-300 rounded-full"></span>
+                {statusMessage}
+              </p>
+            )}
             {status === "error" && (
               <p className="text-red-300 mt-4 flex items-center">
                 <span className="inline-block w-4 h-4 mr-2 bg-red-300 rounded-full"></span>
-                Failed to send message. {errorMessage && `Details: ${errorMessage}`}
+                {statusMessage}
               </p>
             )}
           </div>
