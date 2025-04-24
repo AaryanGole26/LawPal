@@ -4,6 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { supabase } from './supabase';
 
 export const Header = ({ user }) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
