@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal"; // Make sure to install this package
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const servicesData = [
   {
     title: "Personal and Family Legal Assistance",
