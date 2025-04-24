@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabase';
-
+const apiUrl = import.meta.env.VITE_API_URL;
 function Signup() {
   const [formData, setFormData] = useState({
     firstName: '',
