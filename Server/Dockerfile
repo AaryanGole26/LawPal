@@ -1,11 +1,12 @@
 FROM python:3.10-slim
 
-WORKDIR /Server
+WORKDIR /app
 
-COPY requirements.txt .
+COPY Server/requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY Server/ .
 
 EXPOSE 8080
 
