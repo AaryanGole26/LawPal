@@ -1,18 +1,12 @@
-# Use Python 3.10 slim base image
 FROM python:3.10-slim
 
-# Set working directory to /Server
-WORKDIR Server
+WORKDIR /Server
 
-# Copy requirements.txt and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the Server directory contents
 COPY . .
 
-# Expose the port (Railway will override with $PORT)
-EXPOSE 7860
+EXPOSE 8080
 
-# Run Gunicorn with dynamic port
-CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "app:app"]
+CMD ["python", "app.py"]
