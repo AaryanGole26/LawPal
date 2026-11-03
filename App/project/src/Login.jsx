@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from './supabase';
 
 function Login() {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [authMode, setAuthMode] = useState('password'); // or 'otp'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
   const [backgroundIndex, setBackgroundIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -25,9 +25,28 @@ function Login() {
     return () => clearInterval(interval);
   }, []);
 
-  const handlePasswordLogin = async (e) => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
+    setError('');
+    setNotice('');
+    if (!email.trim()) {
+      setError('Enter your email above, then choose "Forgot?" again.');
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setNotice('If that email has an account, a password reset link is on its way.');
+  };
+
+  const handlePasswordLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setNotice('');
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -61,13 +80,13 @@ function Login() {
   const handleOtpVerification = async (e) => {
     e.preventDefault();
     try {
-      const email = window.localStorage.getItem('emailForSignIn');
-      if (!email) {
+      const otpEmail = window.localStorage.getItem('emailForSignIn') || email;
+      if (!otpEmail) {
         setError('Please enter your email again.');
         return;
       }
       const { error } = await supabase.auth.verifyOtp({
-        email,
+        email: otpEmail,
         token: otp,
         type: 'email',
       });
@@ -141,6 +160,12 @@ function Login() {
           </div>
         </div>
 
+        {notice && (
+          <div role="status" className="mb-4 p-3 rounded-lg bg-green-500/20 border border-green-500/30">
+            <p className="text-green-200 text-center text-sm">{notice}</p>
+          </div>
+        )}
+
         {authMode === 'password' ? (
           <form onSubmit={handlePasswordLogin} className="space-y-4">
             <div>
@@ -153,7 +178,9 @@ function Login() {
                   </svg>
                 </div>
                 <input
-                  type="text"
+                  type="email"
+                  required
+                  autoComplete="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -165,9 +192,9 @@ function Login() {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm">Password</label>
-                <a href="#" className="text-xs text-purple-300 hover:text-white transition">
+                <button type="button" onClick={handleForgotPassword} className="text-xs text-purple-300 hover:text-white transition">
                   Forgot?
-                </a>
+                </button>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
@@ -177,6 +204,8 @@ function Login() {
                 </div>
                 <input
                   type="password"
+                  required
+                  autoComplete="current-password"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -195,7 +224,7 @@ function Login() {
         ) : (
           <form onSubmit={otp ? handleOtpVerification : handleOtpLogin} className="space-y-4">
             <div>
-              <label className="block mb-2 text-sm">Email or ID</label>
+              <label className="block mb-2 text-sm">Email</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -204,7 +233,9 @@ function Login() {
                   </svg>
                 </div>
                 <input
-                  type="text"
+                  type="email"
+                  required
+                  autoComplete="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -243,9 +274,9 @@ function Login() {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-300">
             Don't have an account?{' '}
-            <a href="/signup" className="text-purple-300 hover:text-white transition font-medium">
+            <Link to="/signup" className="text-purple-300 hover:text-white transition font-medium">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

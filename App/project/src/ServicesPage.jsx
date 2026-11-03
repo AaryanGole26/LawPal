@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Fade } from "react-awesome-reveal"; // Make sure to install this package
-const apiUrl = import.meta.env.VITE_API_URL;
+import { Reveal } from "react-awesome-reveal";
+
 const servicesData = [
   {
     title: "Personal and Family Legal Assistance",
@@ -91,21 +91,21 @@ const ServicesPage = () => {
       </div>
 
       <div className="container max-w-6xl mx-auto px-6 py-24">
-        <Fade triggerOnce>
+        <Reveal from={{ opacity: 0 }}>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">Explore Our Legal Chatbots</h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Our specialized AI chatbots are designed to provide instant legal guidance across a wide range of topics, making legal assistance accessible to everyone.
             </p>
           </div>
-        </Fade>
+        </Reveal>
 
         
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {servicesData.map((service, index) => (
-            <Fade key={index} triggerOnce direction={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
+            <Reveal key={index} from={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
               <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-500 group">
                 <div className="p-8">
                   <div className={`h-20 w-20 flex items-center justify-center text-4xl mb-6 rounded-2xl bg-gradient-to-br ${service.color} group-hover:scale-110 transition-all duration-500`}>
@@ -142,12 +142,12 @@ const ServicesPage = () => {
                   </button>
                 </div>
               </div>
-            </Fade>
+            </Reveal>
           ))}
         </div>
         
         {/* How It Works Section */}
-        <Fade triggerOnce>
+        <Reveal from={{ opacity: 0 }}>
           <div className="mt-24 backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden">
             <div className="absolute -top-20 -right-20 h-40 w-40 bg-purple-600/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 h-40 w-40 bg-blue-600/20 rounded-full blur-3xl"></div>
@@ -180,10 +180,10 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
-        </Fade>
+        </Reveal>
         
         {/* CTA Section */}
-        <Fade triggerOnce>
+        <Reveal from={{ opacity: 0 }}>
           <div className="mt-24 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -196,7 +196,7 @@ const ServicesPage = () => {
               Start Free Consultation
             </button>
           </div>
-        </Fade>
+        </Reveal>
       </div>
     </div>
   );

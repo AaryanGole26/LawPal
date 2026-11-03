@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabase";
 import { FiFile } from "react-icons/fi"; // imported document icon
 import "./Resources.css";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 const Resources = () => {
   const [pdfs, setPdfs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   // State for the Google search query.
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -22,24 +18,19 @@ const Resources = () => {
           .list("", { limit: 100 });
         if (error) {
           console.error("Error fetching PDFs:", error.message);
+          setLoadError(true);
           return;
         }
-        const pdfFiles = data.filter((file) => file.name.endsWith(".pdf"));
-        const pdfUrls = pdfFiles.map((file) => {
-          const { data: urlData, error: urlError } = supabase.storage
-            .from("pdfs")
-            .getPublicUrl(file.name);
-          if (urlError) {
-            console.error("Error getting public URL:", urlError.message);
-            return null;
-          }
-          return { name: file.name, url: urlData.publicUrl };
-        });
-        const validPdfs = pdfUrls.filter(Boolean);
-        console.log("Fetched PDFs:", validPdfs);
-        setPdfs(validPdfs);
+        const pdfFiles = data.filter((file) => file.name.toLowerCase().endsWith(".pdf"));
+        setPdfs(
+          pdfFiles.map((file) => ({
+            name: file.name,
+            url: supabase.storage.from("pdfs").getPublicUrl(file.name).data.publicUrl,
+          }))
+        );
       } catch (err) {
         console.error("Error:", err);
+        setLoadError(true);
       } finally {
         setLoading(false);
       }
@@ -71,10 +62,6 @@ const Resources = () => {
     return <div className="loading">Loading...</div>;
   }
 
-  if (pdfs.length === 0) {
-    return <div className="no-resources">No PDFs available</div>;
-  }
-
   return (
     <div className="resources-container">
       <h1 className="resources-title">Resources</h1>
@@ -92,6 +79,12 @@ const Resources = () => {
           Search
         </button>
       </form>
+
+      {pdfs.length === 0 && (
+        <div className="no-resources">
+          {loadError ? "Could not load documents right now. Please try again later." : "No PDFs available"}
+        </div>
+      )}
 
       <ul className="resources-list">
         {pdfs.map((pdf, index) => (

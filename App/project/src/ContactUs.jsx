@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiMail, FiPhone, FiMapPin, FiHeadphones } from "react-icons/fi";
+import { apiFetch } from "./api";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -9,9 +10,9 @@ const ContactUs = () => {
     subject: "",
     message: "",
   });
-  const apiUrl = import.meta.env.VITE_API_URL;
+
   const [status, setStatus] = useState(null);
-  const [statusMessage, setStatusMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,28 +21,15 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
-    setStatusMessage(null);
+    setErrorMessage(null);
 
     try {
-      const response = await fetch("https://lawpal.up.railway.app", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus("success");
-        setStatusMessage(data.message || "Message sent successfully!");
-        setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
-      } else {
-        setStatus("error");
-        setStatusMessage(data.error || "Failed to submit the form.");
-      }
+      await apiFetch("/submit-form", { method: "POST", body: formData });
+      setStatus("success");
+      setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
     } catch (error) {
       setStatus("error");
-      setStatusMessage(`Network error: ${error.message}`);
+      setErrorMessage(error.message);
     }
   };
 
@@ -121,29 +109,20 @@ const ContactUs = () => {
               />
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300 shadow-lg hover:shadow-blue-500/50"
+                disabled={status === "loading"}
+                className="w-full disabled:opacity-50 bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300 shadow-lg hover:shadow-blue-500/50"
               >
                 Send Message
               </button>
             </form>
 
-            {/* Status Messages */}
-            {status === "loading" && (
-              <p className="text-yellow-300 mt-4 flex items-center">
-                <span className="inline-block w-4 h-4 mr-2 bg-yellow-300 rounded-full animate-pulse"></span>
-                Sending...
-              </p>
-            )}
-            {status === "success" && (
-              <p className="text-green-300 mt-4 flex items-center">
-                <span className="inline-block w-4 h-4 mr-2 bg-green-300 rounded-full"></span>
-                {statusMessage}
-              </p>
-            )}
+            {/* Status Message */}
+            {status === "loading" && <p className="text-yellow-300 mt-4 flex items-center"><span className="inline-block w-4 h-4 mr-2 bg-yellow-300 rounded-full animate-pulse"></span>Sending...</p>}
+            {status === "success" && <p className="text-green-300 mt-4 flex items-center"><span className="inline-block w-4 h-4 mr-2 bg-green-300 rounded-full"></span>Message sent successfully!</p>}
             {status === "error" && (
               <p className="text-red-300 mt-4 flex items-center">
                 <span className="inline-block w-4 h-4 mr-2 bg-red-300 rounded-full"></span>
-                {statusMessage}
+                Failed to send message. {errorMessage}
               </p>
             )}
           </div>
