@@ -4,13 +4,11 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { supabase } from './supabase';
 
 export const Header = ({ user }) => {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const apiUrl = import.meta.env.VITE_API_URL;
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
@@ -18,7 +16,6 @@ export const Header = ({ user }) => {
   }, []);
 
   const handleLogout = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;

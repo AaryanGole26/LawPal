@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from './supabase';
 
 function Signup() {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    terms: false,
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -24,6 +22,11 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
     try {
       const { error } = await supabase.auth.signUp({
         email: formData.email,
@@ -61,6 +64,7 @@ function Signup() {
         
         {/* Content */}
         <div className="relative z-10">
+          <br /><br />
           <h2 className="text-3xl font-bold mb-2 text-center bg-gradient-to-r from-pink-400 to-blue-500 bg-clip-text text-transparent">Join the community</h2>
           <p className="text-center mb-8 text-gray-300 text-sm">express yourself • be curious • be righteous</p>
 
@@ -77,6 +81,7 @@ function Signup() {
                 <input
                   type="text"
                   name="firstName"
+                  required
                   placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
@@ -88,6 +93,7 @@ function Signup() {
                 <input
                   type="text"
                   name="lastName"
+                  required
                   placeholder="Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
@@ -100,6 +106,8 @@ function Signup() {
             <input
               type="email"
               name="email"
+              required
+              autoComplete="email"
               placeholder="name@example.com"
               value={formData.email}
               onChange={handleChange}
@@ -110,6 +118,8 @@ function Signup() {
             <input
               type="password"
               name="password"
+              required
+              autoComplete="new-password"
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
@@ -127,9 +137,9 @@ function Signup() {
           
           <p className="mt-8 text-center text-sm text-gray-400">
             already one of us?{' '}
-            <a href="/login" className="text-blue-400 hover:text-pink-400 transition-colors">
+            <Link to="/login" className="text-blue-400 hover:text-pink-400 transition-colors">
               sign in
-            </a>
+            </Link>
           </p>
         </div>
       </div>

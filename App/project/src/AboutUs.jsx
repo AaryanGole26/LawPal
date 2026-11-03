@@ -1,7 +1,7 @@
 // AboutUs.jsx
 import React, { useState, useEffect } from "react";
-import { Fade } from "react-awesome-reveal";
-const apiUrl = import.meta.env.VITE_API_URL;
+import { Reveal } from "react-awesome-reveal";
+
 const AboutUs = () => {
   // FAQ data (9 items)
   const faqs = [
@@ -111,19 +111,19 @@ const AboutUs = () => {
 
       <div className="container max-w-6xl mx-auto px-6 py-24">
         {/* Intro Section */}
-        <Fade triggerOnce direction="up">
+        <Reveal from="bottom">
           <div className="text-center mb-24">
             <h2 className="text-4xl font-bold mb-6">Transforming Legal Assistance</h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               LawPal leverages cutting-edge AI to make legal services simple, accessible, and efficient for everyone in India.
             </p>
           </div>
-        </Fade>
+        </Reveal>
 
         {/* Mission & Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
           {/* Our Mission */}
-          <Fade triggerOnce direction="left">
+          <Reveal from="left">
             <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 group">
               <div className="h-16 w-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -158,10 +158,10 @@ const AboutUs = () => {
                 </li>
               </ul>
             </div>
-          </Fade>
+          </Reveal>
 
           {/* Our Vision */}
-          <Fade triggerOnce direction="right">
+          <Reveal from="right">
             <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 group">
               <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -197,11 +197,11 @@ const AboutUs = () => {
                 </li>
               </ul>
             </div>
-          </Fade>
+          </Reveal>
         </div>
 
         {/* Why LawPal is Better */}
-        <Fade triggerOnce>
+        <Reveal from={{ opacity: 0 }}>
           <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 mb-24 relative overflow-hidden">
             <div className="absolute -top-20 -right-20 h-40 w-40 bg-purple-600/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 h-40 w-40 bg-blue-600/20 rounded-full blur-3xl"></div>
@@ -251,19 +251,19 @@ const AboutUs = () => {
               />
             </div>
           </div>
-        </Fade>
+        </Reveal>
 
         {/* FAQ Section */}
         <div className="mb-24">
-          <Fade triggerOnce>
+          <Reveal from={{ opacity: 0 }}>
             <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
               Frequently Asked Questions
             </h2>
-          </Fade>
+          </Reveal>
 
           <div className="space-y-4 max-w-4xl mx-auto">
             {faqs.map((item, index) => (
-              <Fade key={index} triggerOnce delay={index * 100}>
+              <Reveal key={index} from={{ opacity: 0 }} delay={index * 100}>
                 <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl overflow-hidden">
                   <button
                     onClick={() => toggleFAQ(index)}
@@ -292,13 +292,13 @@ const AboutUs = () => {
                     </p>
                   </div>
                 </div>
-              </Fade>
+              </Reveal>
             ))}
           </div>
         </div>
 
         {/* Call To Action */}
-        <Fade triggerOnce>
+        <Reveal from={{ opacity: 0 }}>
           <div className="text-center backdrop-blur-md bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-white/10 rounded-2xl p-12 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 h-40 w-40 bg-purple-600/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -left-10 h-40 w-40 bg-blue-600/20 rounded-full blur-3xl"></div>
@@ -309,7 +309,7 @@ const AboutUs = () => {
             </p>
             
           </div>
-        </Fade>
+        </Reveal>
       </div>
     </div>
   );
